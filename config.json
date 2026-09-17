@@ -1,0 +1,32 @@
+{
+  "user_data_dir": "my-profile", 
+  "default_url": "https://help.snapchat.com/hc/en-us/requests/new?co=true&ticket_form_id=149423",
+
+  "my_name": "",
+  "my_email": "",
+  "my_phone": "+91",
+
+  "names_file": "usernames.txt",
+  "results_log": "results.csv",
+  
+
+  "selectors": {
+    "name_field": "input#request_custom_fields_24281229",
+    "email_field": "input#request_custom_fields_24335325",
+    "phone_field": "input#request_custom_fields_24369716",
+    "customer_name_field": "input#request_custom_fields_24369736",
+    "submit_button": "input[name='commit']"
+  },
+  "chromium_arg": "--disable-blink-features=AutomationControlled,--no-sandbox,--disable-dev-shm-usage",
+  "headless": false,
+  "use_chromium": false,
+
+  "delay_before_typing": 0.2,
+  "delay_between_fields": 0.3,
+  "delay_after_submit": 3.0,
+  "delay_between_customers": 0.5,
+
+  "typing_delay_ms": 15,
+
+  "submit_wait_timeout_ms": 8000
+}

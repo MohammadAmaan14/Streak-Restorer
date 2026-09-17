@@ -1,0 +1,93 @@
+First of all, Have streak with all friends
+Then go to console of snapchat and enter this
+```
+(async () => {
+    const results = new Map();
+    const TARGET = 'لقمان~';
+
+    const scan = () => {
+        document.querySelectorAll('.O4POs').forEach(row => {
+            const name = row.querySelector('[id^="title-"]')?.innerText?.trim();
+            const meta = row.querySelector('.ovUsZ');
+
+            if (!name || !meta) return;
+
+            const streakEl = [...meta.querySelectorAll('span')]
+                .find(s => /^\d+\s*🔥$/.test(s.innerText.trim()));
+
+            results.set(name, {
+                name,
+                streak: streakEl ? parseInt(streakEl.innerText) : null,
+                hasStreak: !!streakEl
+            });
+        });
+    };
+
+    let foundTarget = false;
+
+    for (let i = 0; i < 100; i++) {
+        scan();
+
+        // Check whether target has appeared
+        if ([...results.keys()].some(name => name.replace(/\s+/g, '') === TARGET.replace(/\s+/g, ''))) {
+            foundTarget = true;
+            break;
+        }
+
+        const rows = [...document.querySelectorAll('.O4POs')];
+        const last = rows.at(-1);
+
+        if (!last) break;
+
+        last.scrollIntoView({
+            behavior: 'instant',
+            block: 'end'
+        });
+
+        await new Promise(r => setTimeout(r, 800));
+    }
+
+    scan();
+
+    console.clear();
+
+    const output = [...results.values()];
+
+    console.table(output);
+
+    console.log(
+        foundTarget
+            ? `✅ Target "${TARGET}" found.`
+            : `⚠️ Target "${TARGET}" was not found.`
+    );
+
+    console.log(`Total chats loaded: ${output.length}`);
+    console.log(`Chats with streaks: ${output.filter(x => x.hasStreak).length}`);
+})();
+```
+
+
+Copy the table and go to chat gpt and put their respective usernames, and ask it to give the updated 
+```NAME_TO_USERNAME = {
+    'Mohammed Abdul Rafay': 'm_abdulrafa2448',
+    'Kamina Bhai': 'izme_noman',
+    'Mohammed Rahman': 'mdrahman_16',
+    'Saq': 's_qeee3i',
+    'Barish': 'danish.gg15',
+    'Dan3sh': 'sheik_danesh',
+    'Shaikh Hamza': 'shaikh-hamza211',
+    'Muhammed Fadil': 'muhmedfadil',
+    'sufyan': 'suufyxn',
+    'Hamza Hi IQ': 'hamzaaqsr',
+    'Ammar Feroz': 'axxar.sa7',
+    'لقمان~': 'flick_z21',
+}```
+Then manually put your details in the config file.
+
+
+Once you are done. Open cmd in your folder and do according to where your profile is (it should be my-profile only just change folder name)
+
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --user-data-dir="C:\Users\HP\Desktop\NewCode\my-profile"
+
+After you open browser in the profile add extensions manually and login in snapchat. Then you are done and just need to run the file when you lose streak.
+
